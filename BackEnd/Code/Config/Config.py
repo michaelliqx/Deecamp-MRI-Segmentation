@@ -1,0 +1,12 @@
+# model
+INPUT_SIZE = (240,240,12)
+KERNEL_SIZE = (3,3)
+ACTIVATION = "relu"
+PADDING = "same"
+STRIDES = (1,1)
+KERNEL_INITIALIZER = "he_normal"
+POOL_SIZE = (2,2)
+
+# training
+EPOCHS = 50
+BATCH_SIZE = 16

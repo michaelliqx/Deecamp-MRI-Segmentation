@@ -1,0 +1,23 @@
+{
+  "main.css": "/backend/static/build/static/css/main.ec682af2.chunk.css",
+  "main.js": "/backend/static/build/static/js/main.75708416.chunk.js",
+  "main.js.map": "/backend/static/build/static/js/main.75708416.chunk.js.map",
+  "runtime~main.js": "/backend/static/build/static/js/runtime~main.dbc1ed36.js",
+  "runtime~main.js.map": "/backend/static/build/static/js/runtime~main.dbc1ed36.js.map",
+  "static/css/2.8c4f692c.chunk.css": "/backend/static/build/static/css/2.8c4f692c.chunk.css",
+  "static/js/2.f8df34f2.chunk.js": "/backend/static/build/static/js/2.f8df34f2.chunk.js",
+  "static/js/2.f8df34f2.chunk.js.map": "/backend/static/build/static/js/2.f8df34f2.chunk.js.map",
+  "index.html": "/backend/static/build/index.html",
+  "precache-manifest.6fd8a0c769ff4c71be3ed112e6810770.js": "/backend/static/build/precache-manifest.6fd8a0c769ff4c71be3ed112e6810770.js",
+  "service-worker.js": "/backend/static/build/service-worker.js",
+  "static/css/2.8c4f692c.chunk.css.map": "/backend/static/build/static/css/2.8c4f692c.chunk.css.map",
+  "static/css/main.ec682af2.chunk.css.map": "/backend/static/build/static/css/main.ec682af2.chunk.css.map",
+  "static/media/brainimg.jpg": "/backend/static/build/static/media/brainimg.bf31035f.jpg",
+  "static/media/deecampimg.png": "/backend/static/build/static/media/deecampimg.e8a94bc3.png",
+  "static/media/deecamplogo.jpg": "/backend/static/build/static/media/deecamplogo.2aa4af90.jpg",
+  "static/media/dog1.jpg": "/backend/static/build/static/media/dog1.292ee0af.jpg",
+  "static/media/dog2.jpeg": "/backend/static/build/static/media/dog2.869f2f0a.jpeg",
+  "static/media/dog3.jpeg": "/backend/static/build/static/media/dog3.df034524.jpeg",
+  "static/media/poster.jpg": "/backend/static/build/static/media/poster.2052c2a2.jpg",
+  "static/media/t1.nii.gz": "/backend/static/build/static/media/t1.nii.21a521b2.gz"
+}
