@@ -15,7 +15,7 @@
     </style>
 </head>
 <body onload="draw();">
-    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓 🧠 </p>   
+    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓🧠 </p>   
     <p><input type="checkbox" name="category" value="NCR|NET" onclick="onClick()" checked/>坏死肿瘤核心（NCR）+ 非增强肿瘤核心（NET）</p>
     <p><input type="checkbox" name="category" value="ED" onclick="onClick()" checked/>肿瘤周围水肿（ED）</p>    
     <p><input type="checkbox" name="category" value="ET" onclick="onClick()" checked/>增强肿瘤（ET）</p>  
@@ -164,10 +164,10 @@
     function initModel() {
         var helper = new THREE.AxesHelper(50);
         scene.add(helper);
-        addBrainPart("brain",0.1,0xF3C5A6);
-        addBrainPart("seg_1",0.4,0x910FFD);
+        addBrainPart("brain",0.2,0xF3C5A6);
+        addBrainPart("seg_1",0.3,0x0FFDDD);
         addBrainPart("seg_2",0.5,0xA6FD0F);
-        addBrainPart("seg_4",0.6,0xFF0F2F);
+        addBrainPart("seg_4",0.7,0xFF0F2F);
         
     }
 
