@@ -166,7 +166,9 @@ def add_surface_rendering(nii_object, label_idx, label_value):
         nii_object.labels[label_idx].property = actor_property
 
 def setup_brain(render_window,renderer, name):
+
     file = name + ".nii.gz"
+    # print(file)
     brain = NiiObject()
     brain.file = file
     brain.reader = read_volume(brain.file)
@@ -180,20 +182,21 @@ def setup_brain(render_window,renderer, name):
     bw_lut.SetHueRange(0, 0)
     bw_lut.SetValueRange(0, 2)
     bw_lut.Build()
-
+    # print('step1')
     view_colors = vtk.vtkImageMapToColors()
     view_colors.SetInputConnection(brain.reader.GetOutputPort())
     view_colors.SetLookupTable(bw_lut)
     view_colors.Update()
     brain.image_mapper = view_colors
     brain.scalar_range = scalar_range
-
+    # print('step2')
     add_surface_rendering(brain, 0, sum(scalar_range)/2)  # render index, default extractor value
     renderer.AddActor(brain.labels[0].actor)
     objWriter = vtk.vtkOBJExporter()
     objWriter.SetFilePrefix(name)
     objWriter.SetInput(render_window)
     objWriter.Write()
+    # print('step3')
 
 class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
     def __init__(self):
@@ -201,7 +204,7 @@ class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
         self.show(0)
         self.show(1)
         self.show(2)
-        self.show(4)
+        self.show(3)
 
     def show(self,classType):
         renderer, frame, vtk_widget, interactor, render_window = self.setup()
@@ -211,7 +214,7 @@ class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
             setup_brain(render_window,renderer, "seg_1")
         elif (classType == 2):
             setup_brain(render_window,renderer, "seg_2")
-        elif (classType == 4):
+        elif (classType == 3):
             setup_brain(render_window,renderer, "seg_4")
 
     @staticmethod        
@@ -234,28 +237,31 @@ class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
         return renderer, frame, vtk_widget, interactor, render_window
 
 def preprocess():
-    t1 = sitk.GetArrayFromImage(sitk.ReadImage("t1.nii.gz"))
-    seg = sitk.GetArrayFromImage(sitk.ReadImage("seg.nii.gz"))
+    path = os.getcwd()
+    imgs = os.listdir(path)
+    print('start')
+    for img in imgs:
+        if 't1' in img:
+            t1 = sitk.GetArrayFromImage(sitk.ReadImage(img))
+            break
+
+        # t1 = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(path+'/'+imgs[0])))
+    seg = sitk.GetArrayFromImage(sitk.ReadImage("pred.nii.gz"))
     
     
     t1 = sitk.GetImageFromArray((t1 > 0).astype(np.int8))
     seg_1 = sitk.GetImageFromArray((seg == 1).astype(np.int8))
     seg_2 = sitk.GetImageFromArray((seg == 2).astype(np.int8))
-    seg_4 = sitk.GetImageFromArray((seg == 4).astype(np.int8))
+    seg_4 = sitk.GetImageFromArray((seg == 3).astype(np.int8))
 
-    sitk.WriteImage(t1,'brain.nii.gz')
-    sitk.WriteImage(seg_1,'seg_1.nii.gz')
-    sitk.WriteImage(seg_2,'seg_2.nii.gz')
-    sitk.WriteImage(seg_4,'seg_4.nii.gz')
+    sitk.WriteImage(t1,path+'/brain.nii.gz')
+    sitk.WriteImage(seg_1,path+'/seg_1.nii.gz')
+    sitk.WriteImage(seg_2,path+'/seg_2.nii.gz')
+    sitk.WriteImage(seg_4,path+'/seg_4.nii.gz')
 
 def remove():
     os.remove("brain.nii.gz")
     os.remove("seg_1.nii.gz")
     os.remove("seg_2.nii.gz")
     os.remove("seg_4.nii.gz")
-if __name__ == "__main__":
-    redirect_vtk_messages()
-    app = QtWidgets.QApplication(sys.argv)
-    preprocess()
-    display()
-    remove()
+
