@@ -61,8 +61,8 @@ def getRandomID():
 """
     判断图片是否合适
 """
-def isOKImage(image):
-    if((image > 0).sum() > 16500):
+def isOKImage(image, seg):
+    if((image > 0).sum() > 16500 and seg.max()>0):
         return True
     else:
         return False
@@ -86,34 +86,46 @@ if __name__ == "__main__":
                             passwd = sqlsecret, db = 'slice', charset="utf8") #与云数据库链接
     cursor = db.cursor()
     # detail 为病情简介
-    detail = "今年“六一”是我在小学过的第四个儿童节，虽然离节日还有几天，但是我已经感受到了节日的喜庆。为了过好这个六一，我精心策划了丰富多彩的节目：有唱歌、画画、变魔术等等。策划这么多节目，就是为了让我的六一儿童节过的更难忘，更有意义。"
+    detail = "大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球"
     root = 	"https://slice-1257919653.cos.ap-beijing.myqcloud.com/" # 腾讯云对象存储地址
 
     t1 = sitk.GetArrayFromImage(sitk.ReadImage("t1.nii.gz")) # 相应的nii.gz例子
-    t1 = t1.transpose(2, 1, 0)
+    seg = sitk.GetArrayFromImage(sitk.ReadImage('seg.nii.gz'))
+    seg = seg.transpose(1,2,0)
+    
+    label1 = (seg == 1)
+    label2 = (seg == 2)
+    label4 = (seg == 4)
+
     t1 = ((t1/t1.max())*255)
+    t1 = np.array([t1,t1,t1], dtype=np.uint8)
+    t1 = t1.transpose(2, 3, 1, 0)
+
+    t1[label1] = [145, 15, 253]
+    t1[label2] = [166, 253, 15]
+    t1[label4] = [255, 15, 47]
     id = getRandomID() # 随机获得病例ID
     flag = 0
     slice = 0
     nameList = []
     while(True):
-        image = t1[:,:,slice]
-        if (image.max() > 0 and isOKImage(image)):
+        image = t1[:,:,slice,:]
+        segmentation = seg[:,:,slice]
+        if (image.max() > 0 and isOKImage(image,segmentation)):
             name = id + "_" + str(flag) + ".jpg"
             nameList.append(name)
-            image = ndimage.rotate(image,90)
-            plt.imsave(name, image, cmap='gray') # 可能需要彩色的Segmentation
+            plt.imsave(name, image) # 可能需要彩色的Segmentation
             flag = flag + 1
-        slice += 3
+        slice += 4
         if (flag == 10):
             break
 
-    # 生成特定病例id下的小程序二维码
-    token = getToken(appid,appsecret)
-    getACodeImage(token,'wxCode.jpg',id)
+    # # 生成特定病例id下的小程序二维码
+    # token = getToken(appid,appsecret)
+    # getACodeImage(token,'wxCode.jpg',id)
 
-    # 将名字课表里的图片上传到腾讯云对象存储中
-    uploadFile(nameList)
+    # # 将名字课表里的图片上传到腾讯云对象存储中
+    # uploadFile(nameList)
 
-    # 将id与病情简介传入数据库中
-    SqlInsert(db,cursor,id, detail)
+    # # 将id与病情简介传入数据库中
+    # SqlInsert(db,cursor,id, detail)
