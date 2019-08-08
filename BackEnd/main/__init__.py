@@ -8,20 +8,13 @@ from tensorflow import keras
 import flask
 from tensorflow.python.keras.models import load_model
 import os
-from BackEnd.Code.Model.loss import dice,dice_loss
-from BackEnd.Code.Model.MixUnet import MixModel
+
 from BackEnd.Code.Model.load_data import preprocess_image,predict_slice_nii,predict
 # from BackEnd.main import main
 import nibabel as nib
 import numpy as np
 import SimpleITK as sitk
-# for 3D display
-import argparse
-import vtk
-from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
-import PyQt5.QtWidgets as QtWidgets
-import PyQt5.QtCore as Qt
-import sys
+
 from BackEnd.main.display3D import *
 
 
@@ -48,17 +41,30 @@ def index(path):
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-@main.route('/filesname', methods=['GET'])
-def test2():
-    response = jsonify(filename="testfilename")
-    return response
+@main.route('/t1name', methods=['GET'])
+def t1name():
+    path = basedir + "/static/imgs";
+    files = os.listdir(path)
+    types = ['nii', 'gz']
+    for file in files:
+        if file.split('.')[-1] in types:
+            if 't1' in file:
+                return send_file(os.path.join(path,file),as_attachment=True)
+
+    for file in files:
+        if file.split('.')[-1] in types:
+
+            return send_file(os.path.join(path,file),as_attachment=True)
+    # return send_file(path + '/BraTS19_2013_2_1_t1.nii.gz', as_attachment=True)
+
+path = basedir + "/static/imgs"
 
 @main.route('/filesname', methods=['POST','GET'])
 def test():
-
+    #
     imgs = request.files.getlist('filessss')
-    print(imgs)
-    path = basedir + "/static/imgs"
+    # print(imgs)
+
     if not os.path.exists(path):
         os.makedirs(path)
     # load uploaded file and store it
@@ -80,10 +86,10 @@ def test():
         Unet = keras.models.load_model(os.path.join(os.getcwd()+'/BackEnd/main/model_18.h5'))
         print('model was loaded\nstart predict')
         predict(path,Unet)
-
-        print('done')
+        print('prediction done')
 
         # 3D还原
+        print('start generate 3D files')
         cur_path = os.getcwd()
         os.chdir(cur_path + '/BackEnd/main/static/imgs')
         redirect_vtk_messages()
@@ -95,25 +101,17 @@ def test():
 
         # 移动文件到指定目录
         for item in os.listdir(os.getcwd()+'/BackEnd/main/static/imgs'):
-            types = ['mtl', 'obj']
+            types = ['mtl', 'obj','nii','gz']
             if item.split('.')[-1] in types:
                 shutil.copy(os.path.join(os.getcwd()+'/BackEnd/main/static/imgs',item), os.path.join(os.getcwd()+'/BackEnd/static/build/3D/lib/assets/model',item))
+                shutil.copy(os.path.join(os.getcwd()+'/BackEnd/main/static/imgs',item), os.path.join(os.getcwd()+'/FrontEnd/public',item))
+        # shutil.copy(os.path.join(os.getcwd()+'/FrontEnd/public/3D/lib/assets/model'),)
+        print('3D process done')
 
-        pred = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(path,'pred.nii.gz')))
-        t1 = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(path,'BraTS19_2013_2_1_t1.nii.gz')))
-        print("1:",sum(sum(pred)))
-        pred2 = np.concatenate([pred,pred[0:2,:,:]],axis=0)
-        pred2 = pred2*t1+t1
-        print("2:",sum(sum(pred)))
-        # print(pred[50,:,:])
-        pred2 = sitk.GetImageFromArray(pred2)
-        print("3:",sum(sum(pred)))
-        sitk.WriteImage(pred2, os.path.join(path, 'pred2.nii.gz'))
-    #
+        print('all done')
 
-    #拼接
+    return send_file(path+'/pred.nii.gz', as_attachment=True)
 
-    return send_file(path+'/pred2.nii.gz', as_attachment=True)
 
 
 

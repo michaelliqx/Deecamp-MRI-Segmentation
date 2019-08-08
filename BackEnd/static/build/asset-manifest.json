@@ -1,10 +1,10 @@
 {
-  "main.css": "/backend/static/build/static/css/main.2268d8d5.chunk.css",
-  "main.js": "/backend/static/build/static/js/main.a43f9199.chunk.js",
-  "main.js.map": "/backend/static/build/static/js/main.a43f9199.chunk.js.map",
+  "main.css": "/backend/static/build/static/css/main.ac6e4de7.chunk.css",
+  "main.js": "/backend/static/build/static/js/main.2d576295.chunk.js",
+  "main.js.map": "/backend/static/build/static/js/main.2d576295.chunk.js.map",
   "static/css/1.d0de4273.chunk.css": "/backend/static/build/static/css/1.d0de4273.chunk.css",
-  "static/js/1.e28a5af6.chunk.js": "/backend/static/build/static/js/1.e28a5af6.chunk.js",
-  "static/js/1.e28a5af6.chunk.js.map": "/backend/static/build/static/js/1.e28a5af6.chunk.js.map",
+  "static/js/1.9fb40b56.chunk.js": "/backend/static/build/static/js/1.9fb40b56.chunk.js",
+  "static/js/1.9fb40b56.chunk.js.map": "/backend/static/build/static/js/1.9fb40b56.chunk.js.map",
   "runtime~main.js": "/backend/static/build/static/js/runtime~main.e8248fbd.js",
   "runtime~main.js.map": "/backend/static/build/static/js/runtime~main.e8248fbd.js.map",
   "static/media/dog1.jpg": "/backend/static/build/static/media/dog1.292ee0af.jpg",
@@ -14,9 +14,9 @@
   "static/media/brainimg.jpg": "/backend/static/build/static/media/brainimg.bf31035f.jpg",
   "static/media/poster.jpg": "/backend/static/build/static/media/poster.2052c2a2.jpg",
   "static/media/deecampimg.png": "/backend/static/build/static/media/deecampimg.e8a94bc3.png",
+  "static/css/main.ac6e4de7.chunk.css.map": "/backend/static/build/static/css/main.ac6e4de7.chunk.css.map",
   "static/css/1.d0de4273.chunk.css.map": "/backend/static/build/static/css/1.d0de4273.chunk.css.map",
-  "static/css/main.2268d8d5.chunk.css.map": "/backend/static/build/static/css/main.2268d8d5.chunk.css.map",
   "index.html": "/backend/static/build/index.html",
-  "precache-manifest.d2d5b65787b22927f67ce784154ad001.js": "/backend/static/build/precache-manifest.d2d5b65787b22927f67ce784154ad001.js",
+  "precache-manifest.ebcd81eae6b1c0a0549e0167c08645d4.js": "/backend/static/build/precache-manifest.ebcd81eae6b1c0a0549e0167c08645d4.js",
   "service-worker.js": "/backend/static/build/service-worker.js"
 }
