@@ -33,6 +33,8 @@ def predict_slice_nii(image_dir_path):
     image_path = os.listdir(image_dir_path)
     filename = []
     for imgs in image_path:
+        if 'brain' in imgs:
+            continue
         types = ['nii', 'gz']
         if imgs.split('.')[-1] in types:
             filename.append(imgs)

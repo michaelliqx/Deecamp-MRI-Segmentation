@@ -14,18 +14,18 @@
     </style>
 </head>
 <body onload="draw();" id = "myframe">
-    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓🧠 </p>   
+    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓🧠 </p>  
+    <!-- <p><input type='checkbox' name='category' value='ATLAS' onclick='onClick()' checked>大脑结构区 </p>  -->
     <p><input type="checkbox" name="category" value="NCR|NET" onclick="onClick()" checked/>坏死肿瘤核心（NCR）+ 非增强肿瘤核心（NET）</p>
     <p><input type="checkbox" name="category" value="ED" onclick="onClick()" checked/>肿瘤周围水肿（ED）</p>    
     <p><input type="checkbox" name="category" value="ET" onclick="onClick()" checked/>增强肿瘤（ET）</p>  
 
-<script src="../src/component/3D/lib/three.js"></script>
-<script src="../src/component/3D/lib/js/loaders/OBJLoader.js"></script>
-<script src="../src/component/3D/lib/js/loaders/MTLLoader.js"></script>
-<script src="../src/component/3D/lib/js/controls/OrbitControls.js"></script>
-<script src="../src/component/3D/lib/js/libs/stats.min.js"></script>
-<script src="../src/component/3D/lib/js/libs/dat.gui.min.js"></script>
-
+    <script src="./3D/lib/three.js"></script>
+    <script src="./3D/lib/js/loaders/OBJLoader.js"></script>
+    <script src="./3D/lib/js/loaders/MTLLoader.js"></script>
+    <script src="./3D/lib/js/controls/OrbitControls.js"></script>
+    <script src="./3D/lib/js/libs/stats.min.js"></script>
+    <script src="./3D/lib/js/libs/dat.gui.min.js"></script>
 
 <script>
     
@@ -33,6 +33,7 @@
     var segmentation_1 = null;
     var segmentation_2 = null;
     var segmentation_4 = null;
+    var atlas = null;
     var OBJObject = null;
     var showLabel = [1, 1, 1, 1];
     var renderer;
@@ -89,6 +90,9 @@
                     case "seg_4":
                         scene.add(segmentation_4); 
                         break;
+                    // case 'atlas':
+                    //     scene.add(atlas);
+                    //     break;
                 }                
             }  
             if (!items[i].checked && showLabel[i] == 1) {
@@ -106,6 +110,9 @@
                     case "seg_4":
                         scene.remove(segmentation_4); 
                         break;
+                    // case 'atlas':
+                    //     scene.remove(atlas);
+                    //     break;
                 } 
             }   
         }
@@ -121,13 +128,13 @@
             console.log("Error\n");
         };
         mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath('../src/component/3D/lib/assets/model/');
+        mtlLoader.setPath('./3D/lib/assets/model/');
         //加载mtl文件
         mtlLoader.load(filename + '.mtl', function (material) {
             objLoader = new THREE.OBJLoader();
             //设置当前加载的纹理
             objLoader.setMaterials(material);
-            objLoader.setPath('../src/component/3D/lib/assets/model/');
+            objLoader.setPath('./3D/lib/assets/model/');
             objLoader.load(filename + '.obj', function (obj) {
                 obj.traverse(function(child)
                 {
@@ -156,6 +163,9 @@
                     case "seg_4":
                         segmentation_4 = obj;
                         break;
+                    // case 'atlas':
+                    //     atlas = obj;
+                    //     break;
                 }
                 scene.add(obj);
                 render();
@@ -170,7 +180,7 @@
         addBrainPart("seg_1",0.3,0x0FFDDD);
         addBrainPart("seg_2",0.5,0xA6FD0F);
         addBrainPart("seg_4",0.7,0xFF0F2F);
-        
+        // addBrainPart('atlas',0.9,0x0FFDDD);
     }
 
     //初始化性能插件

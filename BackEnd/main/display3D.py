@@ -205,6 +205,7 @@ class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
         self.show(1)
         self.show(2)
         self.show(3)
+        self.show(4)
 
     def show(self,classType):
         renderer, frame, vtk_widget, interactor, render_window = self.setup()
@@ -216,6 +217,8 @@ class display(QtWidgets.QMainWindow, QtWidgets.QApplication):
             setup_brain(render_window,renderer, "seg_2")
         elif (classType == 3):
             setup_brain(render_window,renderer, "seg_4")
+        elif (classType == 4):
+            setup_brain(render_window,renderer, 'atlas')
 
     @staticmethod        
     def setup():
@@ -247,21 +250,24 @@ def preprocess():
 
         # t1 = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(path+'/'+imgs[0])))
     seg = sitk.GetArrayFromImage(sitk.ReadImage("pred.nii.gz"))
-    
-    
-    t1 = sitk.GetImageFromArray((t1 > 0).astype(np.int8))
+    # atlas = sitk.GetArrayFromImage(sitk.ReadImage('atlas.nii.gz'))
+
+    # t1 = sitk.GetImageFromArray((t1 > 0).astype(np.int8))
     seg_1 = sitk.GetImageFromArray((seg == 1).astype(np.int8))
     seg_2 = sitk.GetImageFromArray((seg == 2).astype(np.int8))
     seg_4 = sitk.GetImageFromArray((seg == 3).astype(np.int8))
+    # atlas = sitk.GetImageFromArray((atlas > 0).astype(np.int8))
 
-    sitk.WriteImage(t1,path+'/brain.nii.gz')
+    # sitk.WriteImage(t1,path+'/brain.nii.gz')
     sitk.WriteImage(seg_1,path+'/seg_1.nii.gz')
     sitk.WriteImage(seg_2,path+'/seg_2.nii.gz')
     sitk.WriteImage(seg_4,path+'/seg_4.nii.gz')
+    # sitk.WriteImage(atlas,path+'/atlas.nii.gz')
 
 def remove():
-    os.remove("brain.nii.gz")
+    # os.remove("brain.nii.gz")
     os.remove("seg_1.nii.gz")
     os.remove("seg_2.nii.gz")
     os.remove("seg_4.nii.gz")
+    # os.remove('atlas.nii.gz')
 
