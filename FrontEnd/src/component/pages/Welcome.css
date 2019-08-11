@@ -1,0 +1,130 @@
+
+.welcome {
+    align-content: center;
+    /* background-image: url('../../imgs/background.jpg'); */
+    /* padding: 0; */
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0%;
+	background-position: center center;
+}
+
+.deecamp {
+    font-size: 30px;
+    opacity: 0.9;
+    color:whitesmoke;
+    text-align: center;
+    position: relative;
+    padding-top: 0%;
+    padding-bottom: 3%;
+}
+.groupname1 {
+    font-size: 30pt;
+    opacity: 0.8;
+    color:whitesmoke;
+    text-align: center;
+    position: relative;
+}
+.groupname {
+    font-size: 20pt;
+    font-style: italic;
+    opacity: 0.9;
+    color:white;
+    text-align: center;
+}
+
+.briefintro {
+    padding-top:5%;
+    font-size: 16pt;
+    font-style: italic;
+    opacity: 0.82;
+    color:whitesmoke;
+    text-align: center;
+}
+
+.deecampimg {
+
+    opacity: 0.9;
+    color:whitesmoke;
+    text-align: center;
+    position: relative;
+    padding-top: 3%;
+    padding-bottom: 0%;
+}
+
+.imgssss {
+    width: 15%;
+}
+
+.bgimg {
+    height:450px;
+    padding-left: 0;
+    padding-top: 20px;
+    background-size: 100%;
+    background-image:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../../imgs/background4.jpg');
+    opacity:0.9;
+    background-repeat: no-repeat;
+}
+
+#welcome-text {
+    margin-left: 20px;
+    margin-right: 20px;
+   
+}
+
+.lead {
+    margin-left: 50px;
+}
+
+
+
+.introduction {
+    margin-bottom: 1%;
+    /* padding-bottom: 0px; */
+    margin-top: 1%;
+    margin-left: 1%;
+    /* text-align: center; */
+ 
+}
+.container-fluid {
+    widows: 100%;
+    margin-top: 0px;
+    padding:0px;
+    margin: 0px;
+
+
+}
+.row {
+    margin-left: 5%;
+    margin-right:5%;
+    text-align: center;
+    line-height: 2.3;
+    margin-top: 1%;
+}
+
+.row-1 {
+    line-height: 2.3;
+    margin-top:1%;
+}
+.row-2 {
+    line-height: 2.3;
+    margin-top: 1%;
+    margin-bottom: 20px;
+}
+
+.col-5 {
+    text-align: center;
+    line-height: 1.7;
+}
+
+
+.test_button {
+    width: 20%;
+    height: 20%;
+    color:lightblue;
+}
+
+.testbuttontext {
+    color: black;
+}
+

@@ -1,0 +1,95 @@
+.red {
+    color:red;
+}
+.green {
+    color:lightgreen;
+}
+
+.purple {
+    color: plum;
+}
+
+.info_text {
+    margin-top: 5%;
+    margin-right: 5px;
+
+}
+
+.upload_button {
+    margin-top: 5%;
+}
+
+.myform {
+margin-left: 5%;
+margin-right: 5%;
+margin-bottom: 0%;
+}
+
+.ageform {
+
+    margin-right:1%;
+}
+
+.stateform{
+    margin-right: 1%;
+    width:200px;
+}
+.submitform {
+    margin-left: 3%;
+}
+
+.gen_report {
+    margin-left: 50px;
+}
+
+
+.mycanvas {
+    
+float: left;
+/* width: 10%; */
+margin-right: 33%;
+width: 20%;
+}
+.explain {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.download {
+    margin-top: 20px;
+}
+.resultpart {
+    width: 100%;
+}
+
+.textbox {
+    margin-top: 5%;
+    color: black;
+}
+
+.report {
+    margin-top: 5%;
+    margin-left: 0%;
+}
+
+.test_button {
+    width: 20%;
+    height: 20%;
+    color:lightblue;
+}
+/* .gen_report {
+    color: whitesmoke;
+} */
+
+
+.text_block {
+    border: 2px solid;
+    
+}
+
+.row {
+    margin-right: 0;
+}
+.col-sm-7 {
+    padding-left: 8%;
+}

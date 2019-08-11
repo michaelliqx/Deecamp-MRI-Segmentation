@@ -1,0 +1,54 @@
+.title {
+    margin-top: 3%;
+    font-size: 20px;
+}
+
+.report-form {
+    margin-top: 1%;
+    width: 900px;
+    height: 1500px;
+    border-top:4px solid black;
+    border-bottom:4px solid black;
+    /* border-left: 0.5px solid black;
+    border-right: 1px solid black; */
+}
+
+.report-head { 
+    font-size: 14px;
+    width:898px;
+    height:90px;
+    border-bottom: 3px solid black;
+}
+
+.extraline {
+    width:898px;
+    height:5px;
+    border-bottom: 3px solid black;
+}
+.report-info {
+
+    text-align: center;
+    width:898px;
+    height:400px;
+    border-bottom: 2px solid black;
+}
+
+
+.seg-img {
+
+}
+
+#mr-suggestion {
+    margin-top: 60px;
+}
+
+#img-result {
+    margin-top:30px;
+    margin-bottom: 30px;
+
+}
+.wxcode {
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 20%;
+}
