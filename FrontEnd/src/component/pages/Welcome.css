@@ -11,45 +11,62 @@
 
 .deecamp {
     font-size: 30px;
-    opacity: 0.9;
+    /* opacity: 0.9; */
     color:whitesmoke;
     text-align: center;
     position: relative;
     padding-top: 0%;
-    padding-bottom: 3%;
+    padding-bottom: 1%;
 }
 .groupname1 {
     font-size: 30pt;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     color:whitesmoke;
     text-align: center;
     position: relative;
+    font-family: 'HYRunYuan-65W';
 }
 .groupname {
     font-size: 20pt;
     font-style: italic;
-    opacity: 0.9;
+    /* opacity: 0.9; */
     color:white;
     text-align: center;
+    font-family: 'HYRunYuan-65W';
 }
 
 .briefintro {
-    padding-top:5%;
+    padding-top:10%;
     font-size: 16pt;
     font-style: italic;
-    opacity: 0.82;
+    /* opacity: 0.82; */
     color:whitesmoke;
     text-align: center;
+    font-family: 'HYRunYuan-65W';
 }
 
 .deecampimg {
 
-    opacity: 0.9;
-    color:whitesmoke;
+    /* opacity: 0.9; */
+    /* color:whitesmoke; */
     text-align: center;
     position: relative;
-    padding-top: 3%;
+    padding-top: 2%;
     padding-bottom: 0%;
+}
+
+#letsgo{
+    background: whitesmoke;
+    color: black;
+    opacity: 0.9;
+    border-radius: 30pt;
+    width: 10%;
+    font-weight:700;
+    font-size: 14pt;
+}
+
+.testbuttontext {
+    color: black
 }
 
 .imgssss {
@@ -57,11 +74,11 @@
 }
 
 .bgimg {
-    height:450px;
+    height:500px;
     padding-left: 0;
     padding-top: 20px;
     background-size: 100%;
-    background-image:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../../imgs/background4.jpg');
+    background-image: url('../../imgs/background6.jpg');
     opacity:0.9;
     background-repeat: no-repeat;
 }
@@ -124,7 +141,24 @@
     color:lightblue;
 }
 
-.testbuttontext {
-    color: black;
+
+
+.btn-lg {
+    background: black;
+    border: 0;
+    width:180px;
+    height:50px;
+    border-radius:20pt;
+}
+
+
+
+
+@font-face {
+    font-family: 'HYRunYuan-65W';
+    src: url('../../HYRunYuan-FEW.woff2') format('woff2'),
+        url('../../HYRunYuan-FEW.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
 }
 

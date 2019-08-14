@@ -31,4 +31,4 @@ def uploadFile(nameList):
             )
         # os.remove(name)
         shutil.move(name,'BackEnd/static/build/'+name)
-        print('here')
+        # print('here')

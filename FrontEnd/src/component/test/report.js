@@ -19,18 +19,18 @@ class Report extends Component {
              dpi: window.devicePixelRatio,      
                    useCORS: true,        
             })
-            .then(canvas=>{         
+            .then(canvas=>{
                    let contentWidth = canvas.width;     
                    let contentHeight = canvas.height;     
                    let pageHeight = contentWidth / 592.28 * 841.89;  
                    let leftHeight = contentHeight;
-                   let position = 100;
+                   let position = 50;
                    let imgWidth = 560.28;
                    let imgHeight = 560.28/contentWidth * contentHeight;
                    let pageData = canvas.toDataURL('image/jpeg', 1.0); 
                    let pdf = new jsPDF('', 'pt', 'a4');           
                     if (leftHeight < pageHeight) {                
-                        pdf.addImage(pageData, 'JPEG', 26, 100, imgWidth, imgHeight );         
+                        pdf.addImage(pageData, 'JPEG', 26, 40, imgWidth, imgHeight );         
                        } else {            
                              while(leftHeight > 0) {      
                               pdf.addImage(pageData, 'JPEG', 26, position, imgWidth, imgHeight);
@@ -50,9 +50,9 @@ class Report extends Component {
     render() {
 
         var myDate = new Date();
-        var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-        var month = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
-        var day = myDate.getDate(); //获取当前日(1-31)
+        var year = myDate.getFullYear(); 
+        var month = myDate.getMonth()+1; 
+        var day = myDate.getDate();
         var time = year+'-'+month+'-'+day;
 
         const {
@@ -75,7 +75,7 @@ class Report extends Component {
                     <div className='report-form'>
                         <div className='report-head'>
                             <div className='container-fluid'>
-                                <div className='row'>
+                                <div className='row' id='class1'>
                                     <div className='col'>检测项目：胶质瘤
                                     </div>
                                     <div className='col'>病例编号：{case_num}
@@ -83,7 +83,7 @@ class Report extends Component {
                                     <div className='col'>分割时间：{time}
                                     </div>
                                 </div>
-                                <div className='row'>
+                                <div className='row' id='class2'>
                                     <div className='col-4'>年龄：{age}
                                     </div>
                                     <div className='col-4'>处理状态：{case_state}
@@ -92,21 +92,21 @@ class Report extends Component {
                             </div>
                          
                         </div>
-                        <div className='extraline'/>
+                        {/* <div className='extraline'/> */}
                         <div className='report-info'>
                             <div className='container-fluid'>
 
-                                <div className='row'>
+                                <div className='row' id='mrzhengxiang'>
                                     <div className='col-sm-2'>MR征象：
                                     </div>
-                                    <div className='col'>{detail}
+                                    <div className='col' id='info1'>{detail}
                                     </div>
                                 </div>
                                 
                                 <div className='row' id='mr-suggestion'>
                                     <div className='col-sm-2'>MR意见：
                                     </div>
-                                    <div className='col' >
+                                    <div className='col' id='info1'>
                                         <div className='illness'>
                                         {classification}
                                         </div>
@@ -119,45 +119,45 @@ class Report extends Component {
 
                         </div>
                         <div className='seg-img'>
-                            <div className='container-fluid'>
+                            <div className='container-fluid' id='container-seg'>
                             {/* <div className='row' id='img-result'>
                             图像结果：
                             </div> */}
-                                <div className='row'>
+                                <div className='row' id='img_area'>
                                     <div className='col-sm-2'>
                                     2D分割图：
                                     </div>
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_1.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_22.jpg'} width='240px' height='240px' />
                                     </div>       
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_2.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_24.jpg'} width='240px' height='240px' />
                                     </div> 
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_3.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_26.jpg'} width='240px' height='240px' />
                                     </div>     
                                     <div className='col-sm-2'>
                                     
                                     </div>
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_4.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_28.jpg'} width='240px' height='240px' />
                                     </div>       
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_5.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_30.jpg'} width='240px' height='240px' />
                                     </div> 
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_6.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_32.jpg'} width='240px' height='240px' />
                                     </div>   <div className='col-sm-2'>
                                     
                                     </div>
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_7.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_34.jpg'} width='240px' height='240px' />
                                     </div>       
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_8.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_36.jpg'} width='240px' height='240px' />
                                     </div> 
-                                    <div className='col-3'>
-                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_9.jpg'} width='240px' height='240px' />
+                                    <div className='col-3'id='info1'>
+                                        <img src={process.env.PUBLIC_URL + '/'+`${case_num}` + '_38.jpg'} width='240px' height='240px' />
                                     </div>    
 
                        
@@ -176,7 +176,7 @@ class Report extends Component {
 
                 </div> 
                 <center>
-                    <button  className= 'btn-lg' onClick={this.creatPdf.bind(this)}> 点击生成pdf </button>
+                    <button id='printpdf' className= 'btn-lg' onClick={this.creatPdf.bind(this)}> 点击生成pdf </button>
                 </center>
             </div>
         )

@@ -70,8 +70,8 @@ THREE.WEBGL = {
 		element.style.background = '#fff';
 		element.style.color = '#000';
 		element.style.padding = '1.5em';
-		element.style.width = '400px';
-		element.style.margin = '5em auto 0';
+		element.style.width = '500px';
+		element.style.margin = '0em auto 0';
 
 		if ( contexts[ version ] ) {
 

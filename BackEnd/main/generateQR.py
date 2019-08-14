@@ -10,6 +10,7 @@ import urllib.parse
 import json
 import os
 import shutil
+from BackEnd.main.drawChart import drawChart;
 
 appid = 'wx210c222c964539dc'
 appsecret = '5240959493b01dc2a556d54ba08f6b1e'
@@ -76,22 +77,20 @@ def getRandomID():
 """
 
 
-def isOKImage(image, seg):
-    if ((image > 0).sum() > 16500 and seg.max() > 0):
+def isOKImage(image):
+    if ((image > 0).sum() > 19600):
         return True
     else:
         return False
 
 
-"""
-    将id, detail插入数据库中
-"""
 
-
-def SqlInsert(db, cursor, id, detail):
+def SqlInsert(db, cursor, id, detail, age, state):
+    # print(detail)
     try:
         # 执行sql
-        cursor.execute('INSERT INTO `sliceImage` (`id`, `detail`) VALUES (%s, %s)', (str(id), detail))
+        cursor.execute('INSERT INTO `sliceImage` (`id`, `detail`, `age`, `state`) VALUES (%s, %s, %s, %s)',
+                       (str(id), detail, str(age), state))
         db.commit()
     except:
         # 发生异常
@@ -99,16 +98,42 @@ def SqlInsert(db, cursor, id, detail):
         db.rollback()
 
 
-def start(number):
+
+def getPercent(t1, label1, label2, label4):
+    t1 = np.sum(t1 > 0)
+    label1 = np.sum(label1)
+    label2 = np.sum(label2)
+    label4 = np.sum(label4)
+
+    percentAll = round(np.float((label1 + label2 + label4) / t1 * 100), 3)
+    percent1 = round(np.float(label1 / t1 * 100), 3)
+    percent2 = round(np.float(label2 / t1 * 100), 3)
+    percent4 = round(np.float(label4 / t1 * 100), 3)
+
+    percentDetail = "整个肿瘤占脑部百分比约为{}%，其中坏死肿瘤核心(NCR)和非增强肿瘤核心(NET)约占为{}%、肿瘤周围水肿(ED)约占{}%、增强肿瘤(ET)约占{}%。\n".format(
+        percentAll, percent1, percent2, percent4)
+
+    return percentDetail
+
+
+
+def start(id,age,state):
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     path = basedir + "/static/imgs"
 
+
     db = pymysql.connect(host='cdb-7vadkr3g.bj.tencentcdb.com', port=10011, user='root',
-                         passwd=sqlsecret, db='slice', charset="utf8")  # 与云数据库链接
+                         passwd='TvCSwvGsB9eXmB', db='slice', charset="utf8")  # 与云数据库链接
+
+
+
     cursor = db.cursor()
     # detail 为病情简介
-    detail = "大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球"
+    detail = "大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好, \
+             我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两\
+             年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，我喜欢唱、跳、RAP、篮球,大家好，我是练习时长两年半的个人练习生，\
+             我喜欢唱、跳、RAP、篮球"
     root = "https://slice-1257919653.cos.ap-beijing.myqcloud.com/"  # 腾讯云对象存储地址
 
     files = os.listdir(path)
@@ -119,11 +144,15 @@ def start(number):
                 t1 = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(path,file)))  # 相应的nii.gz例子
                 break
     seg = sitk.GetArrayFromImage(sitk.ReadImage(path+'/pred2.nii.gz'))
+    tempSeg = seg.copy()
     seg = seg.transpose(1, 2, 0)
 
     label1 = (seg == 1)
     label2 = (seg == 2)
-    label4 = (seg == 4)
+    label4 = (seg == 3)
+
+    detail = getPercent(t1, label1, label2, label4)
+
 
     t1 = ((t1 / t1.max()) * 255)
     t1 = np.array([t1, t1, t1], dtype=np.uint8)
@@ -133,21 +162,35 @@ def start(number):
     t1[label2] = [166, 253, 15]
     t1[label4] = [255, 15, 47]
     # id = getRandomID()  # 随机获得病例ID
-    id = number
-    flag = 0
+
+    number = 1
+    flag = False
     slice = 0
     nameList = []
+
     while (True):
         image = t1[:, :, slice, :]
         segmentation = seg[:, :, slice]
-        if (image.max() > 0 and isOKImage(image, segmentation)):
-            name = id + "_" + str(flag) + ".jpg"
+        if (isOKImage(image) and flag == False):
+            flag = True
+        if (flag):
+            name = id + "_" + str(number) + ".jpg"
             nameList.append(name)
             plt.imsave(name, image)  # 可能需要彩色的Segmentation
-            flag = flag + 1
-        slice += 4
-        if (flag == 10):
+            number = number + 1
+            slice += 2
+        else:
+            slice += 2
+            continue
+        if (number == 51):
             break
+    nameList.append(id + "_pieChart1.jpg")
+    nameList.append(id + "_pieChart2.jpg")
+    nameList.append(id + "_pieChart3.jpg")
+    nameList.append(id + "_pieChart4.jpg")
+    nameList.append(id + "_barChart.jpg")
+
+    text = detail + drawChart(id, tempSeg)
 
     # # 生成特定病例id下的小程序二维码
     token = getToken(appid,appsecret)
@@ -155,6 +198,10 @@ def start(number):
 
     # # 将名字课表里的图片上传到腾讯云对象存储中
     uploadFile(nameList)
+    SqlInsert(db, cursor, id, text, age, state)
 
-    return detail
+    return text
     # # 将id与病情简介传入数据库中
+
+
+

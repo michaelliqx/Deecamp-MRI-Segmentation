@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import deecamplogo from "../../imgs/deecamplogo.jpg"
 import "./Header.css"
-import logo from "../../imgs/logo4.png"
+import logo from "../../imgs/logo2.png"
 
 function Header(props) {
 	// const {
@@ -15,25 +15,18 @@ function Header(props) {
 	return (
 		<div>
 
-			<nav className = "navbar navbar-expand navbar-dark mb-10 py-10" >
+			<nav className = "navbar navbar-expand navbar-dark mb-10 py-15" >
 				<div className = "container-fluid">
 				<a herf = "/" className = "navbar-brand ">
-				<img className = "deecamplogo" src = {deecamplogo} height = "30px" />
-				<img src = {logo} width="25%"/>
+				<img src = {logo} width="9%" className='logo'/>	
+				<Link className='projectname' to = "/">DeeBrain</Link>
+				<Link className='to-test' to = '/test'>Test</Link>
 				</a>
+				
 
 				<div>
 					<ul className = "navbar-nav mr-auto">
-						<li className = "nav-item">
-							<Link to = "/" className = "nav-link">
-							<i className = 'fas fa-home'></i> Home
-							</Link>
-						</li>
-						<li className = "nav-item">
-							<Link to = "/test" className = "nav-link">
-							<i className = 'fas fa-fire'></i> Test
-							</Link>
-						</li>
+
 						<li className = "nav-item">
 							<Link to = "/contact" className = "nav-link">
 							<i className = 'fas fa-plus'></i> contact

@@ -5,14 +5,14 @@
   height:100px;   /* footer的高度一定要是固定值*/ 
   padding-left: 0;
   padding-top: 20px;
-  background-size: 100%;
-  background-image:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../../imgs/background3.jpg');
+  background-size: 120%;
+  background-image:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../../imgs/footer.jpg');
   opacity:0.9;
   background-repeat: no-repeat;
   /* background: #292e34; */
   color: aliceblue;
   margin-top: 10%;
-  max-height: 50px;
+  max-height: 40px;
     /* display */
     padding: 2em 1em;
     padding-bottom: 10em;

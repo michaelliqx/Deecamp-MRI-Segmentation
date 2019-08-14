@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style type="text/css">
+        canvas {
+            display: block;
+        }
         html, body {
             margin: 0;
             height: 100%;
         }
-        canvas {
-            display: block;
-        }
+
     </style>
 </head>
 <body onload="draw();" id = "myframe">
-    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓🧠 </p>  
-    <!-- <p><input type='checkbox' name='category' value='ATLAS' onclick='onClick()' checked>大脑结构区 </p>  -->
-    <p><input type="checkbox" name="category" value="NCR|NET" onclick="onClick()" checked/>坏死肿瘤核心（NCR）+ 非增强肿瘤核心（NET）</p>
-    <p><input type="checkbox" name="category" value="ED" onclick="onClick()" checked/>肿瘤周围水肿（ED）</p>    
-    <p><input type="checkbox" name="category" value="ET" onclick="onClick()" checked/>增强肿瘤（ET）</p>  
-
     <script src="./3D/lib/three.js"></script>
     <script src="./3D/lib/js/loaders/OBJLoader.js"></script>
     <script src="./3D/lib/js/loaders/MTLLoader.js"></script>
@@ -176,7 +171,7 @@
     function initModel() {
         var helper = new THREE.AxesHelper(50);
         scene.add(helper);
-        addBrainPart("brain",0.3,0xF3C5A6);
+        addBrainPart("brain",0.2,0xF3C5A6);
         addBrainPart("seg_1",0.3,0x0FFDDD);
         addBrainPart("seg_2",0.5,0xA6FD0F);
         addBrainPart("seg_4",0.7,0xFF0F2F);
@@ -239,10 +234,16 @@
         initModel();
         initControls();
         initStats();
-
         animate();
         window.onresize = onWindowResize;
     }
 </script>
+    <p><input type="checkbox" name="category" value="BRAIN" onclick="onClick()" checked/>大脑轮廓🧠 </p>  
+    <!-- <p><input type='checkbox' name='category' value='ATLAS' onclick='onClick()' checked>大脑结构区 </p>  -->
+    <p><input type="checkbox" name="category" value="NCR|NET" onclick="onClick()" checked/>坏死肿瘤核心（NCR）+ 非增强肿瘤核心（NET）</p>
+    <p><input type="checkbox" name="category" value="ED" onclick="onClick()" checked/>肿瘤周围水肿（ED）</p>    
+    <p><input type="checkbox" name="category" value="ET" onclick="onClick()" checked/>增强肿瘤（ET）</p>  
+
 </body>
+
 </html>

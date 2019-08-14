@@ -1,3 +1,5 @@
+import codecs
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,18 +13,25 @@ from collections import Counter
 import seaborn as sns  
 import plotly
 import json
+
+
 from scipy.ndimage.interpolation import rotate
 import plotly.graph_objects as go
+
 from plotly.subplots import make_subplots
+import os
 plt.style.use("seaborn")
 plt.rcParams['font.family'] = ['Adobe Fangsong Std']
 
+
+
 def generateBriefIntro4Label(part, label, value):
-    partName = ['大部分分布于', '部分分布于', '其余{}分布于脑部其他区域。']
+    partName = ['至少有40%分布于', '至少有10%分布于', '其余分布于脑部其他区域。\n']
     partFlag = 0
     total = 100.0
     intro = '对于{}'.format(part)
     values = [round(float(value[i])/np.sum(value)*100,2) for i in range(len(value))]
+    print('value:',values,len(values))
     valueDict = {label[i]:values[i] for i in range(len(label))}
     values = sorted(valueDict.items(), key = lambda x: x[1], reverse=True)
     if (values[0][1] < 40):
@@ -42,10 +51,10 @@ def generateBriefIntro4Label(part, label, value):
         if (item[1] < 8):
             if(intro[-1] == '、'):
                 intro = intro[:-1]
-            text =  '(' + str(total) + '%)'
-            intro = intro + '，' + partName[partFlag].format(text)
-            break;
-        text = text + name + "(" + value +")、"
+            intro = intro + '，' + partName[partFlag]
+            break
+        #text = text + name + "(" + value +")、"
+        text = text + name + "、"
         intro = intro + text
         total = round(total - item[1],2)
     return intro
@@ -66,9 +75,9 @@ def generateBriefIntro4Brain(label, percent_all):
     string50 = "、".join(list50)
     string20 = "、".join(list20)
     if(string50):
-        intro = intro + '，' + string50 + '有一半以上的区域被肿瘤占领'
+        intro = intro + '，' + string50 + '有50%以上的区域被肿瘤占领'
     if(string20):
-        intro = intro + '，' + string20 + '有1/5以上的区域被肿瘤占领'
+        intro = intro + '，' + string20 + '有20%以上的区域被肿瘤占领'
     intro = intro + '。'
     return intro
 
@@ -82,20 +91,23 @@ def GetCount(labelSeg):
 def getLabelAndValue(labelDict, labelSeg):
     labelSeg, segNum = GetCount(labelSeg)
     label = labelSeg.keys()
+    print('label:',label)
+    print('labelDict:',labelDict)
     label = [labelDict[key] for key in label]
     item = [labelSeg[key] for key in labelSeg.keys()]
     return label, item
 
-def drawPieChart(label, value, title, filename):
+def drawPieChart(id, label, value, title, filename):
     fig = go.Figure(data=[go.Pie(labels=label, values=value, showlegend=False, 
                          textinfo = 'label+percent', textposition='inside', 
                          textfont = {'size':20,'color':'#FFFFFF'},
                          title={'text':title,'font':{'size':35}},hole=.4, )])
     fig['layout'].update(margin=dict(l=0,r=0,b=0,t=0))
-    fig.write_image(filename + '.jpg', scale = 3)
-    write_json(fig,filename)
+    fig.write_image(id + "_" + filename + '.jpg', scale = 3)
+    # write_json(fig,filename)
 
-def drawBarChart(area4Seg):
+
+def drawBarChart(id, area4Seg):
     temp = sorted(area4Seg.items(), key = lambda x: x[1]['label_percent_all'], reverse=True)
     label_percent_1 = [temp[key][1]['label_percent_1'] for key in range(len(temp))]
     label_percent_2 = [temp[key][1]['label_percent_2'] for key in range(len(temp))]
@@ -114,29 +126,30 @@ def drawBarChart(area4Seg):
     fig = go.Figure(data=[
         go.Bar(name='坏死/非增强肿瘤核心', x=label_name, y = label_percent_1,
             text=[str(item) + '%' for item in label_percent_1], textposition='auto',
-            textfont={'size':13,'color':'#FFFFFF'},
-            outsidetextfont={'size':13,'color':'#000000'}),
+            textfont={'size':17,'color':'#FFFFFF'},
+            outsidetextfont={'size':17,'color':'#000000'}),
         go.Bar(name='肿瘤周围水肿', x=label_name, y = label_percent_2,
             text=[str(item) + '%' for item in label_percent_2], textposition='auto',
-            textfont={'size':13,'color':'#FFFFFF'},
-            outsidetextfont={'size':13,'color':'#000000'}),
+            textfont={'size':17,'color':'#FFFFFF'},
+            outsidetextfont={'size':17,'color':'#000000'}),
         go.Bar(name='增强肿瘤', x=label_name, y = label_percent_4, 
             text=[str(item) + '%' for item in label_percent_4], textposition='auto',
-            textfont={'size':13,'color':'#FFFFFF'},
-            outsidetextfont={'size':13,'color':'#000000'}),
+            textfont={'size':17,'color':'#FFFFFF'},
+            outsidetextfont={'size':17,'color':'#000000'}),
     ])
     # Change the bar mode
     fig.update_layout(barmode='stack',
                     legend=dict(
-                        x=0.71,
+                        x=0.61,
                         y=1.0,
                         bgcolor='rgba(255, 255, 255, 0)',
                         bordercolor='rgba(255, 255, 255, 0)',
-                        font={'size':15}
+                        font={'size':20}
                     ),
                     margin=dict(l=0,r=0,b=0,t=0))
-    fig.write_image('barChart.jpg', scale = 3)
-    write_json(fig,'barChart')
+    fig.layout.template = 'plotly_white'
+    fig.write_image(id + '_barChart.jpg', scale = 3)
+    # write_json(fig,'barChart')
     return label_name, label_percent_all
 
 def write_json(fig, filename):
@@ -152,7 +165,7 @@ def getAreaSegmentation(label, segmentation, labelDict):
             area4Seg[key] = {'area' : (label == key) * segmentation, 'name' : labelDict[key]}
             area4Seg[key]['label_1'] = (area4Seg[key]['area'] == 1)
             area4Seg[key]['label_2'] = (area4Seg[key]['area'] == 2)
-            area4Seg[key]['label_4'] = (area4Seg[key]['area'] == 4)
+            area4Seg[key]['label_4'] = (area4Seg[key]['area'] == 3)
             area4Seg[key]['label_percent_all'] = round(float(np.sum((area4Seg[key]['area'] > 0))/np.sum((label == key))) * 100,2)
             area4Seg[key]['label_percent_1'] = round(float(np.sum((area4Seg[key]['label_1'] > 0))/np.sum((label == key))) * 100,2)
             area4Seg[key]['label_percent_2'] = round(float(np.sum((area4Seg[key]['label_2'] > 0))/np.sum((label == key))) * 100,2)
@@ -166,8 +179,10 @@ def getAreaSegmentation(label, segmentation, labelDict):
 
 def readLabel():
     labelDict = {}
-    f = open("labels_cn.txt")
+    f = open(os.path.join(os.getcwd()+'/BackEnd/main',"labels_cn.txt"),encoding='utf-8')
     line = f.readline()
+
+
     while line:
         if(len(line) > 0):
             line = line.replace('\n','')
@@ -179,15 +194,16 @@ def readLabel():
     return labelDict
 
 
-if __name__ == "__main__":
-    seg = sitk.GetArrayFromImage(sitk.ReadImage('BraTS19_2013_4_1_seg.nii.gz'))
-    label = sitk.GetArrayFromImage(sitk.ReadImage('labels.nii'))
+def drawChart(id, seg):
+    # seg = sitk.GetArrayFromImage(sitk.ReadImage('BraTS19_2013_4_1_seg.nii.gz'))
+    # print(os.getcwd())
+    label = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(os.getcwd()+'/BackEnd/main','labels.nii')))
 
     labelDict = readLabel()
 
     seg1 = (seg == 1) # 坏死肿瘤核心(NCR) + 非增强肿瘤核心(NET)
     seg2 = (seg == 2) # 肿瘤周围水肿(ED)
-    seg4 = (seg == 4) # 增强肿瘤(ET)
+    seg4 = (seg == 3) # 增强肿瘤(ET)
     segAll = (seg > 0)
 
     label1Seg = seg1 * label
@@ -200,20 +216,16 @@ if __name__ == "__main__":
     label4,value4 = getLabelAndValue(labelDict, label4Seg)
     labelAll, valueAll = getLabelAndValue(labelDict, labelAllSeg)
 
-    # drawPieChart(labelAll, valueAll, '整个肿瘤', 'pieChart1')
-    # drawPieChart(label1, value1, '坏死/非增强肿瘤核心', 'pieChart2')
-    # drawPieChart(label2, value2, '肿瘤周围水肿', 'pieChart3')
-    # drawPieChart(label4, value4, '增强肿瘤', 'pieChart4')
+    drawPieChart(id, labelAll, valueAll, '整个肿瘤', 'pieChart1')
+    drawPieChart(id, label1, value1, '坏死/非增强肿瘤核心', 'pieChart2')
+    drawPieChart(id, label2, value2, '肿瘤周围水肿', 'pieChart3')
+    drawPieChart(id, label4, value4, '增强肿瘤', 'pieChart4')
 
     area4Seg = getAreaSegmentation(label, seg, labelDict)
-    
-    label_name, label_percent_all = drawBarChart(area4Seg)
+        
+    label_name, label_percent_all = drawBarChart(id, area4Seg)
 
-    print(generateBriefIntro4Label('整个肿瘤',labelAll, valueAll))
-    print(generateBriefIntro4Label('坏死及非增强肿瘤核心',label1, value1))
-    print(generateBriefIntro4Label('肿瘤周围水肿',label2, value2))
-    print(generateBriefIntro4Label('增强肿瘤',label4, value4))
-    print(generateBriefIntro4Brain(label_name,label_percent_all))
-
-
-
+    text = generateBriefIntro4Label('整个肿瘤',labelAll, valueAll) +'\n'+ generateBriefIntro4Label('坏死及非增强肿瘤核心',label1, value1) +'\n'+ \
+            generateBriefIntro4Label('肿瘤周围水肿',label2, value2) +'\n'+ generateBriefIntro4Label('增强肿瘤',label4, value4) +'\n'+ \
+                    generateBriefIntro4Brain(label_name,label_percent_all)
+    return text

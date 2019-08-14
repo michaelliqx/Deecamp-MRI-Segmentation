@@ -11,3 +11,4 @@ export const ADD_DETAIL = 'ADD_DETAIL';
 
 export const LIVE_PRED = 'LIVE_PRED';
 export const CLASSIFICATION = "CLASSIFICATION";
+export const LOADING = "LOADING";

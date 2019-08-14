@@ -1,7 +1,7 @@
 import React from 'react';
 import brainimg from "../../imgs/background.jpg"
 import poster from "../../imgs/poster.jpg"
-import logo from "../../imgs/logo4.png"
+import logo from "../../imgs/deecamplogo.jpg"
 
 import "./Welcome.css"
 import {
@@ -32,14 +32,13 @@ export default () => {
 		<div className = 'welcome'>
 
       <div className = 'bgimg'>
-        <div className='deecamp'> DeeCamp 2019</div>
-        <div className='groupname1'> 3D医疗影像处理</div>
-        <div className='groupname'> --MRI胶质瘤分割</div>
+        <div className='deecamp'> <img src={logo} width='15%' /></div>
+        <div className='groupname1'> AI天使--3D医疗影像智能诊断</div>
+        <div className='groupname'> MRI脑胶质瘤分割</div>
         <div className='briefintro'>第5组 脑壳不疼</div>
         
-
         <div className = "deecampimg" >
-          <button  className = "btn-lg">
+          <button id='letsgo'  className = "btn">
             <Link to = "/test" className = "testbuttontext" >Let's Go</Link>
           </button>
         </div>

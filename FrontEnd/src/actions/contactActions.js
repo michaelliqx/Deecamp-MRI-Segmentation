@@ -9,6 +9,7 @@ import {
 	ADD_DETAIL,
 	CLASSIFICATION,
 	LIVE_PRED,
+	LOADING,
 } from './types';
 import dog1 from "../imgs/dog1.jpg"
 import dog2 from "../imgs/dog2.jpeg"
@@ -63,6 +64,12 @@ export const addAge = (age) => async dispatch => {
 	dispatch({
 		type:ADD_AGE,
 		payload:age
+	})
+}
+export const Loading = (loading) => async dispatch => {
+	dispatch({
+		type:LOADING,
+		payload:loading
 	})
 }
 export const livePred = (live_pred) => async dispatch => {

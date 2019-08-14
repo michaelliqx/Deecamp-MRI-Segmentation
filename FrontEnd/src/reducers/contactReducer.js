@@ -10,6 +10,7 @@ import {
 	ADD_DETAIL,
 	LIVE_PRED,
 	CLASSIFICATION,
+	LOADING,
 } from "../actions/types";
 
 
@@ -22,6 +23,7 @@ const initialState = {
 	detail:'',
 	live_pred:'',
 	classification:'',
+	loading:false,
 };
 
 export default function(state = initialState, action) {
@@ -36,6 +38,12 @@ export default function(state = initialState, action) {
 		return {
 			...state,
 			classification:action.payload
+		}
+
+		case LOADING:
+		return {
+			...state,
+			loading:action.payload
 		}
 
 		case ADD_AGE:
