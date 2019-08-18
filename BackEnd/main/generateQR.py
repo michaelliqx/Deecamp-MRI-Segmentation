@@ -194,6 +194,7 @@ def start(id,age,state):
 
     # # 生成特定病例id下的小程序二维码
     token = getToken(appid,appsecret)
+
     getACodeImage(token,'wxCode.jpg',id)
 
     # # 将名字课表里的图片上传到腾讯云对象存储中

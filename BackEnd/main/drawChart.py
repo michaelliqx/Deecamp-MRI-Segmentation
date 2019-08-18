@@ -225,7 +225,7 @@ def drawChart(id, seg):
         
     label_name, label_percent_all = drawBarChart(id, area4Seg)
 
-    text = generateBriefIntro4Label('整个肿瘤',labelAll, valueAll) +'\n'+ generateBriefIntro4Label('坏死及非增强肿瘤核心',label1, value1) +'\n'+ \
-            generateBriefIntro4Label('肿瘤周围水肿',label2, value2) +'\n'+ generateBriefIntro4Label('增强肿瘤',label4, value4) +'\n'+ \
+    text = generateBriefIntro4Label('整个肿瘤',labelAll, valueAll) + generateBriefIntro4Label('坏死及非增强肿瘤核心',label1, value1) + \
+            generateBriefIntro4Label('肿瘤周围水肿',label2, value2) + generateBriefIntro4Label('增强肿瘤',label4, value4) + \
                     generateBriefIntro4Brain(label_name,label_percent_all)
     return text

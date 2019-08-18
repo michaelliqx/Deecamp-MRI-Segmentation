@@ -12,7 +12,7 @@
 
 .report-form {
     margin-top: 1%;
-    width: 63%;
+    width: 75%;
     height: 95%;
     border-top:4px solid black;
     border-bottom:4px solid black;
@@ -25,18 +25,22 @@
 }
 .row {
     font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
 }
 
 #class1 {
  margin-top:1%;
  font-family: 'Times New Roman', Times, serif;
+ font-size:20px;
 }
 #class2 {
     margin-bottom: 1%;
     font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
 }
 #info1 {
     padding-left: 0;
+    font-size:20px;
 }
 
 .report-head { 

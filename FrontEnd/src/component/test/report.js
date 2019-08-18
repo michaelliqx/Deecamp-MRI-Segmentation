@@ -101,6 +101,7 @@ class Report extends Component {
                                     </div>
                                     <div className='col' id='info1'>{detail}
                                     </div>
+                                    
                                 </div>
                                 
                                 <div className='row' id='mr-suggestion'>

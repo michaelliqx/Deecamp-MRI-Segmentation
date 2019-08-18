@@ -14,6 +14,13 @@ import {
 import dog1 from "../imgs/dog1.jpg"
 import dog2 from "../imgs/dog2.jpeg"
 import dog3 from "../imgs/dog3.jpeg"
+import kongya from '../imgs/kongya.png'
+import yuanzhe from '../imgs/yuanzhe.png'
+import yanbai from '../imgs/yanbai.jpeg'
+import zhiming from '../imgs/zhiming.jpeg'
+
+import kaixiang from '../imgs/kaixiang.jpeg'
+import yuanfang from '../imgs/yuanfang.jpeg'
 import axios from "axios";
 
 // fetch data
@@ -32,26 +39,10 @@ export function parseJSON(response) {
 export const getContacts = () => async dispatch => {
 	const res = [{
 		id :1,
-		name : 'Qingxing Li',
-		email : "543045137@qq.com" ,
-		university: "Boston University",
+		name : '李青星',
+		email : "543045137@qq.com/lqx1996@bu.edu" ,
+		university: "波士顿大学",
 		photo: dog1,
-		detail:"hello world!",
-	},
-	{
-		id :2,
-		name : 'Qingxing Li2',
-		email : "543045137@qq.com" ,
-		university: "Boston University",
-		photo:dog2,
-		detail:"hello world!",
-	},
-	{
-		id :3,
-		name : 'Qingxing Li3',
-		email : "543045137@qq.com" ,
-		university: "Boston University",
-		photo:dog3,
 		detail:"hello world!",
 	}]
 	dispatch({
