@@ -1,6 +1,6 @@
 # Deecamp-MRI-Segmentation
 
-### 文件说明
+### 文件说明 （只包括部分重要文件）
     -BackEnd
         - Code 包含部分前期测试代码 不是最终使用模型
         - Data Demo使用数据 在运行web时可使用这个数据（四个一起选择并提交）
@@ -12,8 +12,11 @@
             - generateQR.py 生成二维码
             - survival_regression.py 生存分析
             - upload2Qcloud.py 上传小程序所用数据到云端
+            - model_18.h5 使用的模型文件
+        - static build之后生成的文件夹，每次执行npm build会删除并重新生成
     -Demo 可忽略
     -FrontEnd React前端框架文件夹
+        - node_modules dependencies
         - public 公共文件夹
         - src 功能文件
             - actions React中的action声明与定义
@@ -28,7 +31,7 @@
 
 ### 如何使用
 #### 安装与运行
-- 安装 npm, nodejs. 在终端执行 npm install安装dependencies，确认python包的安装
+- 安装 npm, nodejs. 在终端执行 npm install安装dependencies（有 FrontEnd/node_modules文件夹则无需执行npm install），确认python包的安装
 - 运行 run.py, 然后打开网页 （http://localhost:8010)
 
 #### web端使用
