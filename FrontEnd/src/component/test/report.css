@@ -1,0 +1,90 @@
+.title {
+    margin-top: 3%;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+}
+
+#printpdf {
+    margin-top:2%;
+    color: white;
+}
+
+.report-form {
+    margin-top: 1%;
+    width: 75%;
+    height: 95%;
+    border-top:4px solid black;
+    border-bottom:4px solid black;
+    /* border-left: 0.5px solid black;
+    border-right: 1px solid black; */
+}
+
+#mrzhengxiang {
+    margin-top: 1%;
+}
+.row {
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
+}
+
+#class1 {
+ margin-top:1%;
+ font-family: 'Times New Roman', Times, serif;
+ font-size:20px;
+}
+#class2 {
+    margin-bottom: 1%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
+}
+#info1 {
+    padding-left: 0;
+    font-size:20px;
+}
+
+.report-head { 
+    font-size: 14px;
+    width:100%;
+    height:15%;
+    border-bottom: 3px solid black;
+}
+
+.extraline {
+    width:100%;
+    height:3pt;
+    border-bottom: 3px solid black;
+}
+.report-info {
+
+    text-align: center;
+    width:100%;
+    height:600px;
+    border-bottom: 2px solid black;
+}
+
+
+#container-seg {
+    margin-bottom: 5%;
+}
+
+#mr-suggestion {
+    margin-top: 60px;
+}
+
+#img-result {
+    margin-top:30px;
+    margin-bottom: 30px;
+
+}
+
+#img_area {
+    margin-top: 2%;
+}
+
+
+.wxcode {
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 0%;
+}

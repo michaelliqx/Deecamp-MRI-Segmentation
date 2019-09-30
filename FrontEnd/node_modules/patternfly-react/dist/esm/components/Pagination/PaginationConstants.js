@@ -1,0 +1,7 @@
+export var PAGINATION_VIEW = {
+  LIST: 'list',
+  CARD: 'card',
+  TABLE: 'table'
+};
+
+export var PAGINATION_VIEW_TYPES = [PAGINATION_VIEW.LIST, PAGINATION_VIEW.CARD, PAGINATION_VIEW.TABLE];

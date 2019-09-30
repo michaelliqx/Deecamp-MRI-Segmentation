@@ -1,0 +1,23 @@
+#name {
+
+
+}
+
+.name {
+    font-size: 20px;
+}
+#namelist {
+    margin-bottom: 1%;
+}
+
+#namelist img {
+    margin-left:13%;
+    width:200px;
+    height:210px;
+    border-radius: 100px;
+}
+
+#namelist div{
+    text-align: center;
+    font-size: 14px;
+}

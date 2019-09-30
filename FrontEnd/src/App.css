@@ -1,0 +1,47 @@
+.App {
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    /* position:relative;   */
+}
+
+
+.App1{
+    /*保证footer是相对于container位置绝对定位*/
+    position:relative;  
+    width:100%;
+    min-height:100%; 
+    /*设置padding-bottom值大于等于footer的height值，以保证main的内容能够全部显示出来而不被footer遮盖；*/  
+    padding-bottom: 200px;  
+    box-sizing: border-box;
+    flex-direction: column;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+header{
+    width: 100%;
+    flex: 0 0 auto;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+.container-fluid {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    flex: 1 0 auto;
+}
+footer{
+    width: 100%;
+    height:100px;   /* footer的高度一定要是固定值*/ 
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    flex: 0 0 auto;
+}

@@ -1,0 +1,27 @@
+
+.chuangxin {
+    min-height: 100px;
+    height: 600px;
+    max-height: 800px;
+    background-image: url('../../imgs/deecampimg.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.row {
+    font-size: 16px;
+    line-height: 2.3;
+    text-align: justify;
+    margin-right: 5%;
+}
+
+.column-2 {
+    line-height: 32px
+}
+
+.tolink {
+    margin-top: 50px;
+    font-size: 20px;
+    display: block
+
+}
