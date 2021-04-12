@@ -28,6 +28,7 @@
                 - test 测试页面
             - imgs 图像
             - reducers React中的reducer声明与定义
+    -SegModel 分割模型
 
 ### 如何使用
 #### 安装与运行
