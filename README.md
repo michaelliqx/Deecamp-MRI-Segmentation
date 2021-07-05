@@ -1,5 +1,7 @@
 # Deecamp-MRI-Segmentation
 
+项目视频：[【Demo展示】DeeCamp2019：DeeBrain-3D医学影像智能诊断](https://www.bilibili.com/video/BV1Di4y1x7Vu)
+
 ### 文件说明 （只包括部分重要文件）
     -BackEnd
         - Code 包含部分前期测试代码 不是最终使用模型
